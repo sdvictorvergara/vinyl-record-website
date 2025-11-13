@@ -1,18 +1,18 @@
 // Main script for contact form handling
 document.addEventListener('DOMContentLoaded', function () {
-  const contactForm = document.querySelector('form');
+  const contact_form = document.querySelector('form');
   const confirmationMessage = document.createElement('p');
 
   // Style confirmation message
   confirmationMessage.style.color = 'green';
-  contactForm.parentNode.insertBefore(confirmationMessage, contactForm.nextSibling);
+  contact_form.parentNode.insertBefore(confirmationMessage, contact_form.nextSibling);
 
   // Handle form submission
-  contactForm.addEventListener('submit', function (event) {
+  contact_form.addEventListener('submit', function (event) {
     event.preventDefault();
 
     // Reset form fields
-    contactForm.reset();
+    contact_form.reset();
 
     // Display confirmation message
     confirmationMessage.textContent = '¡Mensaje enviado correctamente!';
