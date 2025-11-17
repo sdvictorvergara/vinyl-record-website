@@ -66,7 +66,7 @@
     height: auto;
   }
 
-  #nav-bar ul {
+  .nav-bar ul {
     list-style-type: none;
     display: flex;
     justify-content: center;
@@ -75,7 +75,7 @@
     padding: 0;
   }
 
-  #nav-bar a {
+  .nav-bar a {
     text-decoration: none;
     color: #45488f;
     padding: 0.5rem 1rem;
@@ -83,9 +83,19 @@
     border-radius: 10px;
   }
 
-  #nav-bar a:hover {
+  .nav-bar a:hover {
     color: black;
     background-color: #51faaa;
+  }
+
+  #nav-bar-login {
+
+  }
+
+  #login-button {
+    border: 3px solid #51faaa;
+    border-radius: 3px;
+    padding: 10px;
   }
 
   /* MAIN CONTENT */
@@ -415,7 +425,7 @@
         display: none;
     } */
 
-  #nav-bar ul {
+  .nav-bar ul {
     list-style-type: none;
     display: flex;
     gap: 1.5rem;
@@ -423,7 +433,7 @@
     padding: 0;
   }
 
-  #nav-bar a {
+  .nav-bar a {
     text-decoration: none;
     color: #45488f;
     padding: 0.5rem 1rem;
@@ -432,7 +442,7 @@
     font-size: 0.9rem;
   }
 
-  #nav-bar a:hover {
+  .nav-bar a:hover {
     color: black;
     background-color: #51faaa;
   }
@@ -776,7 +786,7 @@
         font-size: 0.9rem;
     } */
 
-  #nav-bar ul {
+  .nav-bar ul {
     list-style-type: none;
     display: flex;
     flex-wrap: wrap;
@@ -786,7 +796,7 @@
     padding: 0;
   }
 
-  #nav-bar a {
+  .nav-bar a {
     text-decoration: none;
     color: #45488f;
     padding: 0.4rem 0.8rem;
@@ -795,7 +805,7 @@
     font-size: 0.75rem;
   }
 
-  #nav-bar a:hover {
+  .nav-bar a:hover {
     color: black;
     background-color: #51faaa;
   }
