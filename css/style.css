@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap');
 
+:root {
+  /* COLORS */
+  --bg: #1c1a31;
+  --section-color: #141223;
+
+  /* OTHER THINGS */
+  --buttom-border: 25px;
+}
+
 /* BASE STYLES AND DESKTOP */
 @media only screen and (min-width: 992px) {
   * {
@@ -8,7 +17,7 @@
   }
 
   body {
-    background-color: #1c1a31;
+    background-color: var(--bg);
     font-family: 'Holtwood One SC', serif;
     color: white;
   }
@@ -32,7 +41,7 @@
     align-items: center;
     height: 12vh;
     width: 80vw;
-    border-radius: 25px;
+    border-radius: var(--buttom-border);
   }
 
   #task-bar {
@@ -83,7 +92,7 @@
   }
 
   .nav-bar-directions a {
-      color: #45488f;
+    color: #45488f;
   }
 
   .nav-bar-directions a:hover {
@@ -92,18 +101,26 @@
   }
 
   #nav-bar-login li {
-    color: #51faaa;
     border-radius: 10px;
     padding: 10px;
   }
 
-  #login-button {
-    color: white;
-    border: 3px solid #51faaa;
+  #login-button a {
+    color: #51faaa;
   }
 
-  /* #login-button {
-  } */
+  #login-button {
+    border: 3px solid #51faaa;
+  }
+  
+  #register-button {
+    /* border: 3px solid #51faaa; */
+    background-color: #51faaa;
+  }
+  
+  #register-button a {
+    color: black;
+  }
 
   /* MAIN CONTENT */
   #content-margin {
@@ -150,7 +167,7 @@
   }
 
   .card {
-    background-color: #141223;
+    background-color: var(--section-color);
     display: flex;
     justify-content: center;
     align-items: stretch;
@@ -163,7 +180,7 @@
   }
 
   .mini-card {
-    background-color: #1c1a31;
+    background-color: var(--bg);
     border: 1px solid #3a3c5f;
     border-radius: 15px;
     flex: 1 1 250px;
@@ -212,7 +229,7 @@
   }
 
   #service-container {
-    background-color: #141223;
+    background-color: var(--section-color);
     width: 100vw;
     height: 50vh;
     text-align: center;
@@ -231,7 +248,7 @@
   #contact {
     width: 100vw;
     min-height: 100vh;
-    background-color: #1c1a31;
+    background-color: var(--bg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -248,7 +265,7 @@
   }
 
   #contact-form {
-    background-color: #141223;
+    background-color: var(--section-color);
     border-radius: 20px;
     padding: 2rem;
     flex: 1 1 45%;
@@ -276,7 +293,7 @@
     padding: 0.8rem;
     border: none;
     border-radius: 10px;
-    background-color: #1c1a31;
+    background-color: var(--bg);
     color: white;
     font-family: 'Holtwood One SC', serif;
   }
@@ -316,7 +333,7 @@
 
   /* FOOTER */
   #footer-container {
-    background-color: #141223;
+    background-color: var(--section-color);
     width: 100vw;
     padding: 3rem 0;
     display: flex;
@@ -356,7 +373,7 @@
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background-color: #1c1a31;
+    background-color: var(--bg);
     color: #51faaa;
     font-size: 1.5rem;
     transition: 0.3s ease;
@@ -365,7 +382,7 @@
 
   #social-media a:hover {
     background-color: #51faaa;
-    color: #1c1a31;
+    color: var(--bg);
     transform: scale(1.1);
   }
 
@@ -383,7 +400,7 @@
   }
 
   body {
-    background-color: #1c1a31;
+    background-color: var(--bg);
     font-family: 'Holtwood One SC', serif;
     color: white;
   }
@@ -504,7 +521,7 @@
   }
 
   .card {
-    background-color: #141223;
+    background-color: var(--section-color);
     display: flex;
     justify-content: center;
     align-items: stretch;
@@ -517,7 +534,7 @@
   }
 
   .mini-card {
-    background-color: #1c1a31;
+    background-color: var(--bg);
     border: 1px solid #3a3c5f;
     border-radius: 15px;
     flex: 1 1 calc(50% - 1rem);
@@ -568,7 +585,7 @@
   }
 
   #service-container {
-    background-color: #141223;
+    background-color: var(--section-color);
     width: 100vw;
     padding: 6rem 2rem;
     text-align: center;
@@ -589,7 +606,7 @@
   #contact {
     width: 100vw;
     min-height: 100vh;
-    background-color: #1c1a31;
+    background-color: var(--bg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -604,7 +621,7 @@
   }
 
   #contact-form {
-    background-color: #141223;
+    background-color: var(--section-color);
     border-radius: 20px;
     padding: 2rem;
     width: 100%;
@@ -630,7 +647,7 @@
     padding: 0.8rem;
     border: none;
     border-radius: 10px;
-    background-color: #1c1a31;
+    background-color: var(--bg);
     color: white;
     font-family: 'Holtwood One SC', serif;
     box-sizing: border-box;
@@ -672,7 +689,7 @@
 
   /* FOOTER */
   #footer-container {
-    background-color: #141223;
+    background-color: var(--section-color);
     width: 100vw;
     padding: 2.5rem 0;
     display: flex;
@@ -712,7 +729,7 @@
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: #1c1a31;
+    background-color: var(--bg);
     color: #51faaa;
     font-size: 1.3rem;
     transition: 0.3s ease;
@@ -721,7 +738,7 @@
 
   #social-media a:hover {
     background-color: #51faaa;
-    color: #1c1a31;
+    color: var(--bg);
     transform: scale(1.1);
   }
 
@@ -739,7 +756,7 @@
   }
 
   body {
-    background-color: #1c1a31;
+    background-color: var(--bg);
     font-family: 'Holtwood One SC', serif;
     color: white;
   }
@@ -869,7 +886,7 @@
   }
 
   .card {
-    background-color: #141223;
+    background-color: var(--section-color);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -881,7 +898,7 @@
   }
 
   .mini-card {
-    background-color: #1c1a31;
+    background-color: var(--bg);
     border: 1px solid #3a3c5f;
     border-radius: 15px;
     width: 100%;
@@ -932,7 +949,7 @@
   }
 
   #service-container {
-    background-color: #141223;
+    background-color: var(--section-color);
     width: 100vw;
     padding: 2rem 1.5rem;
     text-align: center;
@@ -954,7 +971,7 @@
   #contact {
     width: 100vw;
     min-height: auto;
-    background-color: #1c1a31;
+    background-color: var(--bg);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -969,7 +986,7 @@
   }
 
   #contact-form {
-    background-color: #141223;
+    background-color: var(--section-color);
     border-radius: 15px;
     padding: 1.5rem;
     width: 100%;
@@ -996,7 +1013,7 @@
     padding: 0.7rem;
     border: none;
     border-radius: 10px;
-    background-color: #1c1a31;
+    background-color: var(--bg);
     color: white;
     font-family: 'Holtwood One SC', serif;
     font-size: 0.75rem;
@@ -1040,7 +1057,7 @@
 
   /* FOOTER */
   #footer-container {
-    background-color: #141223;
+    background-color: var(--section-color);
     width: 100vw;
     padding: 2rem 0;
     display: flex;
@@ -1081,7 +1098,7 @@
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    background-color: #1c1a31;
+    background-color: var(--bg);
     color: #51faaa;
     font-size: 1.2rem;
     transition: 0.3s ease;
@@ -1090,7 +1107,7 @@
 
   #social-media a:active {
     background-color: #51faaa;
-    color: #1c1a31;
+    color: var(--bg);
     transform: scale(0.95);
   }
 

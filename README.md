@@ -54,6 +54,7 @@ vinyl-record-history-website/
 This project was inspired and supported by ideas, resources, and people from the GitHub community:
 
 - [@Ixf2](https://github.com/Ixf2) 
+- [@Dansitaaaa](https://github.com/Davaalsito) 
 - [@tcrurav](https://github.com/tcrurav)
 
 - https://dribbble.com/shots/25478108-Puzzle-Fintech-Website-Design-Case-Study
