@@ -77,26 +77,33 @@
 
   .nav-bar a {
     text-decoration: none;
-    color: #45488f;
     padding: 0.5rem 1rem;
     transition: background-color 0.5s;
     border-radius: 10px;
   }
 
-  .nav-bar a:hover {
+  .nav-bar-directions a {
+      color: #45488f;
+  }
+
+  .nav-bar-directions a:hover {
     color: black;
     background-color: #51faaa;
   }
 
-  #nav-bar-login {
-
+  #nav-bar-login li {
+    color: #51faaa;
+    border-radius: 10px;
+    padding: 10px;
   }
 
   #login-button {
+    color: white;
     border: 3px solid #51faaa;
-    border-radius: 3px;
-    padding: 10px;
   }
+
+  /* #login-button {
+  } */
 
   /* MAIN CONTENT */
   #content-margin {
