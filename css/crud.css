@@ -1,0 +1,133 @@
+#crud-controls {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.crud-btn {
+  background-color: #51faaa;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 1.5rem;
+  font-family: 'Holtwood One SC', serif;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.crud-btn:hover {
+  background-color: white;
+}
+
+.mini-card .crud-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.mini-card .edit-btn, .mini-card .delete-btn {
+  background-color: #45488f;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.mini-card .edit-btn:hover {
+  background-color: #51faaa;
+  color: black;
+}
+
+.mini-card .delete-btn:hover {
+  background-color: #ff4d4d;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #141223;
+  border: 1px solid #3a3c5f;
+  border-radius: 20px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  color: white;
+  font-family: 'Holtwood One SC', serif;
+}
+
+.close {
+  color: #51faaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: white;
+}
+
+#modal-title {
+  color: #51faaa;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+#artist-form label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+#artist-form input {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 10px;
+  background-color: #1c1a31;
+  color: white;
+  font-family: 'Holtwood One SC', serif;
+}
+
+#artist-form input:focus {
+  outline: 2px solid #51faaa;
+}
+
+#save-artist-btn, #cancel-btn {
+  margin-top: 1.5rem;
+  background-color: #51faaa;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem;
+  color: black;
+  font-family: 'Holtwood One SC', serif;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-right: 1rem;
+}
+
+#save-artist-btn:hover, #cancel-btn:hover {
+  background-color: white;
+}
+
+/* Responsive adjustments for modal */
+@media only screen and (max-width: 600px) {
+  .modal-content {
+    width: 95%;
+    padding: 1.5rem;
+  }
+}

@@ -42,96 +42,30 @@
       </div>
     </div>
     <div id="musician-card">
-
-      <article class="card">
-        <div class="mini-card">
-          <img src="images/artists/cacho-castaña.jpeg" alt="Artista 1">
-          <h3>Cacho Castaña</h3>
-          <p>Género:</p>
-          <p>Balada Romántica</p>
-          <p>Tango</p>
-        </div>
-
-        <div class="mini-card">
-          <img src="images/artists/carlos-gardel.jpeg" alt="Artista 2">
-          <h3>Carlos Gardel</h3>
-          <p>Género:</p>
-          <p>Música clásica</p>
-          <p>Tango</p>
-        </div>C
-
-        <div class="mini-card">
-          <img src="images/artists/hugo-carril.jpg" alt="Artista 3">
-          <h3>Hugo del Carril</h3>
-          <p>Género:</p>
-          <p>Pop</p>
-          <p>Tango</p>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="mini-card">
-          <img src="images/artists/andres-calamaro.jpg" alt="Artista 4">
-          <h3> Andres Calamaro</h3>
-          <p>Género:</p>
-          <p>Reggae</p>
-          <p>Pop</p>
-          <p>Rock</p>
-        </div>
-
-        <div class="mini-card">
-          <img src="images/artists/fito-paez.webp" alt="Artista 5">
-          <h3>Fito Paez</h3>
-          <p>Género:</p>
-          <p>Rock</p>
-        </div>
-
-        <div class="mini-card">
-          <img src="images/artists/alberto-spinetta.avif" alt="Artista 6">
-          <h3>Luis Alberto Spinetta</h3>
-          <p>Género:</p>
-          <p>Rock</p>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="mini-card">
-          <img src="images/artists/los-zafiros.webp" alt="Artista 7">
-          <h3>Los Zafiros</h3>
-          <p>Género:</p>
-          <p>Bossa Nova</p>
-          <p>Bolero</p>
-        </div>
-
-        <div class="mini-card">
-          <img src="images/artists/trio-reyes.jpg" alt="Artista 8">
-          <h3>Los tres Reyes</h3>
-          <p>Género:</p>
-          <p>Vals</p>
-          <p>Bolero</p>
-        </div>
-
-        <div class="mini-card">
-          <img src="images/artists/pedro-infante.jpg" alt="Artista 9">
-          <h3>Pedro Infante</h3>
-          <p>Género:</p>
-          <p>Valses</p>
-          <p>chachachás</p>
-          <p>rancheras</p>
-          <p>boleros</p>
-
-        </div>
-      </article>
-      <article class="card">
-        <div class="mini-card">
-          <img src="images/artists/wos.jpg" alt="Artista 10">
-          <h3>WOS</h3>
-          <p>Género:</p>
-          <p>Rock Alternativo</p>
-          <p>Hip hop</p>
-        </div>
-      </article>
-
+      <div id="crud-controls">
+        <button id="add-artist-btn" class="crud-btn">Agregar Artista</button>
+      </div>
+      <!-- Las tarjetas se generan dinámicamente con JS -->
+    </div>
+    <!-- Modal para CRUD -->
+    <div id="artist-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modal-title">Agregar Artista</h2>
+        <form id="artist-form">
+          <label for="artist-name">Nombre del Artista</label>
+          <input type="text" id="artist-name" name="name" required>
+          
+          <label for="artist-image">URL de la Imagen</label>
+          <input type="url" id="artist-image" name="image" required>
+          
+          <label for="artist-genres">Géneros (separados por comas)</label>
+          <input type="text" id="artist-genres" name="genres" required>
+          
+          <button type="submit" id="save-artist-btn">Guardar</button>
+          <button type="button" id="cancel-btn">Cancelar</button>
+        </form>
+      </div>
     </div>
     <section id="services">
       <div id="service-container">
@@ -168,9 +102,10 @@
 
         <div id="map-container">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7037.2525216679705!2d-15.449318323868791!3d28.1274174068379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xc40951c8a18a0f3%3A0x142cb0d09763a325!2sIES%20El%20Rinc%C3%B3n!5e0!3m2!1ses!2ses!4v1761755446628!5m2!1ses!2ses"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3518.6262608339853!2d-15.449318323868816!3d28.1274174068379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xc40951c8a18a0f3%3A0x142cb0d09763a325!2sIES%20El%20Rinc%C3%B3n!5e0!3m2!1ses!2ses!4v1763629512268!5m2!1ses!2ses"
             style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
           </iframe>
+          
         </div>
       </div>
     </section>
@@ -196,6 +131,5 @@
 
   <script src="js/main.js"></script>
 </body>
-
 
 </html>
