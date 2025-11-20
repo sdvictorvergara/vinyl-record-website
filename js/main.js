@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const musician_card_container = document.getElementById('musician-card');
   const add_artist_button = document.getElementById('add-artist-btn');
   const artist_modal = document.getElementById('artist-modal');

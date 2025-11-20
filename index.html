@@ -45,9 +45,7 @@
       <div id="crud-controls">
         <button id="add-artist-btn" class="crud-btn">Agregar Artista</button>
       </div>
-      <!-- Las tarjetas se generan dinámicamente con JS -->
     </div>
-    <!-- Modal para CRUD -->
     <div id="artist-modal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
@@ -55,13 +53,13 @@
         <form id="artist-form">
           <label for="artist-name">Nombre del Artista</label>
           <input type="text" id="artist-name" name="name" required>
-          
+
           <label for="artist-image">URL de la Imagen</label>
           <input type="url" id="artist-image" name="image" required>
-          
+
           <label for="artist-genres">Géneros (separados por comas)</label>
           <input type="text" id="artist-genres" name="genres" required>
-          
+
           <button type="submit" id="save-artist-btn">Guardar</button>
           <button type="button" id="cancel-btn">Cancelar</button>
         </form>
@@ -83,7 +81,7 @@
       <div id="contact-container">
         <div id="contact-form">
           <h2>Contáctanos</h2>
-          <form action="#" method="post">
+          <form id="contact-box">
             <label for="name">Nombre</label>
             <input type="text" id="name" name="name" placeholder="Tu nombre" required>
 
@@ -105,7 +103,7 @@
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3518.6262608339853!2d-15.449318323868816!3d28.1274174068379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xc40951c8a18a0f3%3A0x142cb0d09763a325!2sIES%20El%20Rinc%C3%B3n!5e0!3m2!1ses!2ses!4v1763629512268!5m2!1ses!2ses"
             style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
           </iframe>
-          
+
         </div>
       </div>
     </section>
@@ -130,6 +128,7 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="js/form.js"></script>
 </body>
 
 </html>
