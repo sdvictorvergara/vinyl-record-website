@@ -22,31 +22,38 @@ git clone https://github.com/sdvictorvergara/vinyl-record-history-website
 
 ## 📂 Project Structure
 ````
-vinyl-record-history-website/
-│
-├── index.html
-├── LICENSE
-├── README.md
+vinyl-record-website/
 │
 ├── css/
-│   └── style.css
+│   ├── global.css
+│   ├── index.css
+│   └── login.css
 │
 ├── images/
-│   ├── logo.ico
-│   └── artistas/
-│       ├── alberto-spinetta.avif
-│       ├── andres-calamaro.jpg
-│       ├── cacho-castaña.jpeg
-│       ├── carlos-gardel.jpeg
-│       ├── fito-paez.webp
-│       ├── hugo-carril.jpg
-│       ├── los-zafiros.webp
-│       ├── pedro-infante.jpg
-│       ├── trio-reyes.jpg
-│       └── wos.jpg
+│   ├── artists/
+│   │   ├── alberto-spinetta.avif
+│   │   ├── andres-calamaro.jpg
+│   │   ├── cacho-castaña.jpeg
+│   │   ├── carlos-gardel.jpeg
+│   │   ├── fito-paez.webp
+│   │   ├── hugo-carril.jpg
+│   │   ├── los-zafiros.webp
+│   │   ├── pedro-infante.jpg
+│   │   ├── trio-reyes.jpg
+│   │   └── wos.jpg
+│   └── logo.ico
 │
-└── js/
-    └── main.js
+├── js/
+│   ├── auth.js
+│   └── main.js
+│
+├── json/
+│   └── users.json
+│
+├── index.html
+├── login.html
+├── LICENSE
+└── README.md
 
 ````
 ## 🙌 Credits & References
