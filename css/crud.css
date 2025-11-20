@@ -18,10 +18,20 @@
   background-color: white;
 }
 
+/* Corrección para mini-card - Aumentar altura_________________________________________________________________________ */
+.mini-card {
+  box-sizing: border-box;
+  overflow: hidden;
+  min-height: 380px;
+}
+
 .mini-card .crud-actions {
   display: flex;
   gap: 0.5rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .mini-card .edit-btn,
@@ -34,6 +44,10 @@
   font-size: 0.8rem;
   cursor: pointer;
   transition: 0.3s;
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  box-sizing: border-box;
 }
 
 .mini-card .edit-btn:hover {
@@ -45,7 +59,14 @@
   background-color: #ff4d4d;
 }
 
-/* Modal Styles */
+.mini-card h3,
+.mini-card p {
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Modal Styles_________________________________________________________________________ */
 .modal {
   display: none;
   position: fixed;
@@ -102,10 +123,22 @@
   background-color: #1c1a31;
   color: white;
   font-family: 'Holtwood One SC', serif;
+  box-sizing: border-box;
 }
 
 #artist-form input:focus {
   outline: 2px solid #51faaa;
+}
+
+/* Estilos para mensajes de error_________________________________________________________________________ */
+.error-message {
+  display: block;
+  color: #ff4d4d;
+  font-size: 0.75rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.5rem;
+  min-height: 1rem;
+  font-family: Arial, sans-serif;
 }
 
 #save-artist-btn,
@@ -127,10 +160,116 @@
   background-color: white;
 }
 
-/* Responsive adjustments for modal */
+/* Estilos para modales de notificación_________________________________________________________________________ */
+.notification-modal {
+  max-width: 400px;
+  text-align: center;
+  padding: 2rem;
+}
+
+.close-notification {
+  color: #51faaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 20px;
+}
+
+.close-notification:hover {
+  color: white;
+}
+
+.notification-title {
+  color: #51faaa;
+  font-size: 1.8rem;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.notification-message {
+  color: #ccc;
+  font-size: 1rem;
+  margin: 1.5rem 0;
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.notification-btn {
+  background-color: #51faaa;
+  border: none;
+  border-radius: 10px;
+  padding: 0.8rem 2rem;
+  color: black;
+  font-family: 'Holtwood One SC', serif;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 1rem;
+  margin: 0.5rem;
+}
+
+.notification-btn:hover {
+  background-color: white;
+}
+
+.notification-btn.cancel {
+  background-color: #45488f;
+  color: white;
+}
+
+.notification-btn.cancel:hover {
+  background-color: #6668a8;
+}
+
+.notification-btn.confirm {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.notification-btn.confirm:hover {
+  background-color: #ff6b6b;
+}
+
+.notification-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Responsive adjustments for modal_________________________________________________________________________ */
 @media only screen and (max-width: 600px) {
   .modal-content {
     width: 95%;
     padding: 1.5rem;
+  }
+
+  .notification-modal {
+    padding: 1.5rem;
+  }
+
+  .notification-title {
+    font-size: 1.4rem;
+  }
+
+  .notification-message {
+    font-size: 0.9rem;
+  }
+
+  .notification-btn {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .notification-buttons {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .notification-btn {
+    width: 100%;
+  }
+
+  .error-message {
+    font-size: 0.7rem;
   }
 }

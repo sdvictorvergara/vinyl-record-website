@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap');
 @import url(crud.css);
 
-/* BASE STYLES AND DESKTOP */
+/* BASE STYLES AND DESKTOP_________________________________________________________________________ */
 @media only screen and (min-width: 992px) {
   * {
     margin: 0;
@@ -44,16 +44,6 @@
     align-items: center;
   }
 
-  /* #search {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 30%;
-        padding: 0.5rem;
-        border-radius: 10px;
-        border: 1px solid #3a3c5f;
-    } */
-
   #logo {
     display: flex;
     align-items: center;
@@ -89,7 +79,7 @@
     background-color: #51faaa;
   }
 
-  /* MAIN CONTENT */
+  /* MAIN CONTENT_________________________________________________________________________ */
   #content-margin {
     text-align: center;
     margin: 20% 0 16% 0;
@@ -152,7 +142,7 @@
     border-radius: 15px;
     flex: 1 1 250px;
     max-width: 300px;
-    height: 320px;
+    height: 380px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -298,7 +288,7 @@
     height: 100%;
   }
 
-  /* FOOTER */
+  /* FOOTER_________________________________________________________________________ */
   #footer-container {
     background-color: #141223;
     width: 100vw;
@@ -359,7 +349,7 @@
   }
 }
 
-/* TABLET (768px - 991px) */
+/* TABLET (768px - 991px)_________________________________________________________________________ */
 @media only screen and (min-width: 601px) and (max-width: 991px) {
   * {
     margin: 0;
@@ -412,10 +402,6 @@
     font-size: 1.5rem;
   }
 
-  /* #search {
-        display: none;
-    } */
-
   #nav-bar ul {
     list-style-type: none;
     display: flex;
@@ -438,7 +424,7 @@
     background-color: #51faaa;
   }
 
-  /* MAIN CONTENT */
+  /* MAIN CONTENT_________________________________________________________________________ */
   .home {
     padding-top: 180px;
   }
@@ -478,7 +464,7 @@
     padding: 1rem 2rem;
   }
 
-  /* ARTISTS */
+  /* ARTISTS_________________________________________________________________________ */
   #musician-card {
     padding: 2rem 0;
     display: flex;
@@ -506,7 +492,7 @@
     border-radius: 15px;
     flex: 1 1 calc(50% - 1rem);
     max-width: 280px;
-    height: 300px;
+    height: 360px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -542,7 +528,7 @@
     margin: 0;
   }
 
-  /* SERVICES */
+  /* SERVICES_________________________________________________________________________ */
   #services {
     min-height: 80vh;
     width: 100vw;
@@ -569,7 +555,7 @@
     font-size: 0.9rem;
   }
 
-  /* CONTACT */
+  /* CONTACT_________________________________________________________________________ */
   #contact {
     width: 100vw;
     min-height: 100vh;
@@ -654,7 +640,7 @@
     height: 100%;
   }
 
-  /* FOOTER */
+  /* FOOTER_________________________________________________________________________ */
   #footer-container {
     background-color: #141223;
     width: 100vw;
@@ -715,7 +701,7 @@
   }
 }
 
-/* MOBILE (max 600px) */
+/* MOBILE (max 600px)_________________________________________________________________________ */
 @media only screen and (max-width: 600px) {
   * {
     margin: 0;
@@ -728,7 +714,7 @@
     color: white;
   }
 
-  /* HEADER */
+  /* HEADER_________________________________________________________________________ */
   .container {
     position: fixed;
     top: 0;
@@ -767,16 +753,6 @@
     font-size: 1.2rem;
   }
 
-  /* #search {
-        width: 90%;
-        padding: 0.5rem;
-        border-radius: 10px;
-        border: 1px solid #3a3c5f;
-        background-color: #1c1a31;
-        color: white;
-        font-size: 0.9rem;
-    } */
-
   #nav-bar ul {
     list-style-type: none;
     display: flex;
@@ -801,7 +777,7 @@
     background-color: #51faaa;
   }
 
-  /* MAIN CONTENT */
+  /* MAIN CONTENT_________________________________________________________________________ */
   .home {
     padding-top: 200px;
   }
@@ -843,7 +819,7 @@
     background-color: white;
   }
 
-  /* ARTISTS */
+  /* ARTISTS_________________________________________________________________________ */
   #musician-card {
     padding: 1.5rem 0;
     display: flex;
@@ -870,7 +846,7 @@
     border-radius: 15px;
     width: 100%;
     max-width: 320px;
-    height: 300px;
+    height: 360px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -906,7 +882,7 @@
     margin: 0;
   }
 
-  /* SERVICES */
+  /* SERVICES_________________________________________________________________________ */
   #services {
     min-height: auto;
     width: 100vw;
@@ -934,7 +910,7 @@
     line-height: 1.5;
   }
 
-  /* CONTACT */
+  /* CONTACT_________________________________________________________________________ */
   #contact {
     width: 100vw;
     min-height: auto;
@@ -1022,7 +998,7 @@
     height: 100%;
   }
 
-  /* FOOTER */
+  /* FOOTER_________________________________________________________________________ */
   #footer-container {
     background-color: #141223;
     width: 100vw;

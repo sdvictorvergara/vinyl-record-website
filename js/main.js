@@ -5,47 +5,126 @@ document.addEventListener('DOMContentLoaded', function () {
   const close_modal_button = document.querySelector('.close');
   const artist_form = document.getElementById('artist-form');
   const modal_title = document.getElementById('modal-title');
-  const save_artist_button = document.getElementById('save-artist-btn');
   const cancel_modal_button = document.getElementById('cancel-btn');
 
-  let editing_artist_index = null;
+  let editing_index = null;
 
-  // Default artist data
+  // Default artists_________________________________________________________________________
   const default_artists = [
     { name: 'Cacho Castaña', image: 'images/artists/cacho-castaña.jpeg', genres: ['Balada Romántica', 'Tango'] },
     { name: 'Carlos Gardel', image: 'images/artists/carlos-gardel.jpeg', genres: ['Música clásica', 'Tango'] },
     { name: 'Hugo del Carril', image: 'images/artists/hugo-carril.jpg', genres: ['Pop', 'Tango'] },
-    { name: 'Andres Calamaro', image: 'images/artists/andres-calamaro.jpg', genres: ['Reggae', 'Pop', 'Rock'] },
+    { name: 'Andres Calamaro', image: 'images/artists/andres-calamaro.jpg', genres: ['Pop', 'Rock'] },
     { name: 'Fito Paez', image: 'images/artists/fito-paez.webp', genres: ['Rock'] },
     { name: 'Luis Alberto Spinetta', image: 'images/artists/alberto-spinetta.avif', genres: ['Rock'] },
     { name: 'Los Zafiros', image: 'images/artists/los-zafiros.webp', genres: ['Bossa Nova', 'Bolero'] },
     { name: 'Los tres Reyes', image: 'images/artists/trio-reyes.jpg', genres: ['Vals', 'Bolero'] },
-    { name: 'Pedro Infante', image: 'images/artists/pedro-infante.jpg', genres: ['Valses', 'chachachás', 'rancheras', 'boleros'] },
+    { name: 'Pedro Infante', image: 'images/artists/pedro-infante.jpg', genres: ['Valses', 'boleros'] },
     { name: 'WOS', image: 'images/artists/wos.jpg', genres: ['Rock Alternativo', 'Hip hop'] }
   ];
 
-  // Load artists from localStorage
+  // Show notification modal_________________________________________________________________________
+  function show_modal(message) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'flex';
+
+    modal.innerHTML = `
+      <div class="modal-content notification-modal">
+        <span class="close-notification">&times;</span>
+        <h2 class="notification-title">¡Éxito!</h2>
+        <p class="notification-message">${message}</p>
+        <button class="notification-btn" id="notification-ok">Aceptar</button>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    function close_notification_modal() {
+      modal.style.display = 'none';
+      document.body.removeChild(modal);
+    }
+
+    modal.querySelector('.close-notification').addEventListener('click', close_notification_modal);
+    modal.querySelector('#notification-ok').addEventListener('click', close_notification_modal);
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) close_notification_modal();
+    });
+  }
+
+  // Show confirmation modal_________________________________________________________________________
+  function show_confirm_modal(message, on_confirm) {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'flex';
+
+    modal.innerHTML = `
+      <div class="modal-content notification-modal">
+        <span class="close-notification">&times;</span>
+        <h2 class="notification-title">Confirmación</h2>
+        <p class="notification-message">${message}</p>
+        <div class="notification-buttons">
+          <button class="notification-btn cancel" id="confirm-cancel">Cancelar</button>
+          <button class="notification-btn confirm" id="confirm-ok">Eliminar</button>
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    function close_confirm_modal() {
+      modal.style.display = 'none';
+      document.body.removeChild(modal);
+    }
+
+    modal.querySelector('.close-notification').addEventListener('click', close_confirm_modal);
+    modal.querySelector('#confirm-cancel').addEventListener('click', close_confirm_modal);
+    modal.querySelector('#confirm-ok').addEventListener('click', function () {
+      on_confirm();
+      close_confirm_modal();
+    });
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) close_confirm_modal();
+    });
+  }
+
+  // Validate URL_________________________________________________________________________
+  function is_valid_url(url) {
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  // Load artists_________________________________________________________________________
   function load_artists() {
-    const stored_artists = localStorage.getItem('artists');
-    return stored_artists ? JSON.parse(stored_artists) : default_artists;
+    const stored = localStorage.getItem('artists');
+    return stored ? JSON.parse(stored) : default_artists;
   }
 
-  // Save artists to localStorage
-  function save_artists(artists_list) {
-    localStorage.setItem('artists', JSON.stringify(artists_list));
+  function save_artists(artists) {
+    localStorage.setItem('artists', JSON.stringify(artists));
   }
 
-  // Render artist cards
-  function render_artist_cards() {
-    const artists_list = load_artists();
-    const cards_container = document.querySelector('#musician-card .card') || document.createElement('article');
-    cards_container.className = 'card';
-    cards_container.innerHTML = '';
+  // Render artist cards_________________________________________________________________________
+  function render_artists() {
+    const artists = load_artists();
+    let container = document.querySelector('#musician-card .card');
 
-    artists_list.forEach((artist, index) => {
-      const artist_card = document.createElement('div');
-      artist_card.className = 'mini-card';
-      artist_card.innerHTML = `
+    if (!container) {
+      container = document.createElement('article');
+      container.className = 'card';
+      musician_card_container.appendChild(container);
+    }
+
+    container.innerHTML = '';
+
+    artists.forEach((artist, index) => {
+      const card = document.createElement('div');
+      card.className = 'mini-card';
+      card.innerHTML = `
         <img src="${artist.image}" alt="${artist.name}">
         <h3>${artist.name}</h3>
         <p>Genre:</p>
@@ -55,72 +134,111 @@ document.addEventListener('DOMContentLoaded', function () {
           <button class="delete-btn" data-index="${index}">Borrar</button>
         </div>
       `;
-      cards_container.appendChild(artist_card);
+      container.appendChild(card);
     });
 
-    musician_card_container.appendChild(cards_container);
-
-    // Events for edit and delete
-    document.querySelectorAll('.edit-btn').forEach(button => {
-      button.addEventListener('click', (e) => edit_artist(e.target.dataset.index));
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+      btn.addEventListener('click', () => edit_artist(btn.dataset.index));
     });
-    document.querySelectorAll('.delete-btn').forEach(button => {
-      button.addEventListener('click', (e) => delete_artist(e.target.dataset.index));
+    document.querySelectorAll('.delete-btn').forEach(btn => {
+      btn.addEventListener('click', () => delete_artist(btn.dataset.index));
     });
   }
 
-  // Open modal to add artist
   add_artist_button.addEventListener('click', () => {
-    editing_artist_index = null;
-    modal_title.textContent = 'Add Artist';
+    editing_index = null;
+    modal_title.textContent = 'Agregar Artista';
     artist_form.reset();
     artist_modal.style.display = 'flex';
   });
 
-  // Close modal
-  close_modal_button.addEventListener('click', () => artist_modal.style.display = 'none');
-  cancel_modal_button.addEventListener('click', () => artist_modal.style.display = 'none');
-
-  // Save artist
-  artist_form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const artist_name = document.getElementById('artist-name').value;
-    const artist_image = document.getElementById('artist-image').value;
-    const artist_genres = document.getElementById('artist-genres').value.split(',').map(g => g.trim());
-
-    const artists_list = load_artists();
-    if (editing_artist_index !== null) {
-      artists_list[editing_artist_index] = { name: artist_name, image: artist_image, genres: artist_genres };
-    } else {
-      artists_list.push({ name: artist_name, image: artist_image, genres: artist_genres });
-    }
-
-    save_artists(artists_list);
+  // Close modal_________________________________________________________________________
+  close_modal_button.addEventListener('click', () => {
     artist_modal.style.display = 'none';
-    render_artist_cards();
   });
 
-  // Edit artist
+  cancel_modal_button.addEventListener('click', () => {
+    artist_modal.style.display = 'none';
+  });
+
+  // Save artist_________________________________________________________________________
+  artist_form.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    let is_valid = true;
+    const name = document.getElementById('artist-name').value.trim();
+    const image = document.getElementById('artist-image').value.trim();
+    const genres_input = document.getElementById('artist-genres').value.trim();
+
+    if (!name) {
+      document.getElementById('error-artist-name').textContent = 'Por favor, ingresa el nombre del artista';
+      is_valid = false;
+    }
+
+    if (!image) {
+      document.getElementById('error-artist-image').textContent = 'Por favor, ingresa la URL de la imagen';
+      is_valid = false;
+    } else if (!is_valid_url(image)) {
+      document.getElementById('error-artist-image').textContent = 'Por favor, ingresa una URL válida';
+      is_valid = false;
+    }
+
+    if (!genres_input) {
+      document.getElementById('error-artist-genres').textContent = 'Por favor, ingresa al menos un género';
+      is_valid = false;
+    }
+
+    if (is_valid) {
+      const genres = genres_input.split(',').map(g => g.trim()).filter(g => g);
+
+      if (genres.length === 0) {
+        document.getElementById('error-artist-genres').textContent = 'Por favor, ingresa al menos un género válido';
+        return;
+      }
+
+      const artists = load_artists();
+
+      if (editing_index !== null) {
+        artists[editing_index] = { name, image, genres };
+        show_modal('¡Artista actualizado correctamente!');
+      } else {
+        artists.push({ name, image, genres });
+        show_modal('¡Artista agregado correctamente!');
+      }
+
+      save_artists(artists);
+      artist_modal.style.display = 'none';
+      render_artists();
+    }
+  });
+
+  // Edit artist_________________________________________________________________________
   function edit_artist(index) {
-    const artists_list = load_artists();
-    const artist_to_edit = artists_list[index];
-    editing_artist_index = index;
-    modal_title.textContent = 'Edit Artist';
-    document.getElementById('artist-name').value = artist_to_edit.name;
-    document.getElementById('artist-image').value = artist_to_edit.image;
-    document.getElementById('artist-genres').value = artist_to_edit.genres.join(', ');
+    const artists = load_artists();
+    const artist = artists[index];
+    editing_index = index;
+    modal_title.textContent = 'Editar Artista';
+    document.getElementById('artist-name').value = artist.name;
+    document.getElementById('artist-image').value = artist.image;
+    document.getElementById('artist-genres').value = artist.genres.join(', ');
     artist_modal.style.display = 'flex';
   }
 
-  // Delete artist
+  // Delete artist_________________________________________________________________________
   function delete_artist(index) {
-    if (confirm('Are you sure you want to delete this artist?')) {
-      const artists_list = load_artists();
-      artists_list.splice(index, 1);
-      save_artists(artists_list);
-      render_artist_cards();
-    }
+    const artists = load_artists();
+    const artist_name = artists[index].name;
+
+    show_confirm_modal(
+      `¿Estás seguro de que quieres eliminar a ${artist_name}?`,
+      function () {
+        artists.splice(index, 1);
+        save_artists(artists);
+        render_artists();
+        show_modal('Artista eliminado correctamente');
+      }
+    );
   }
 
-  render_artist_cards();
+  render_artists();
 });
