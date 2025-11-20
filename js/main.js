@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   let editing_artist_index = null;
 
-  // Datos de artistas predeterminados
+  // Default artist data
   const default_artists = [
     { name: 'Cacho Castaña', image: 'images/artists/cacho-castaña.jpeg', genres: ['Balada Romántica', 'Tango'] },
     { name: 'Carlos Gardel', image: 'images/artists/carlos-gardel.jpeg', genres: ['Música clásica', 'Tango'] },
@@ -24,18 +24,18 @@ document.addEventListener('DOMContentLoaded', function() {
     { name: 'WOS', image: 'images/artists/wos.jpg', genres: ['Rock Alternativo', 'Hip hop'] }
   ];
 
-  // Cargar artistas desde localStorage
+  // Load artists from localStorage
   function load_artists() {
     const stored_artists = localStorage.getItem('artists');
     return stored_artists ? JSON.parse(stored_artists) : default_artists;
   }
 
-  // Guardar artistas en localStorage
+  // Save artists to localStorage
   function save_artists(artists_list) {
     localStorage.setItem('artists', JSON.stringify(artists_list));
   }
 
-  // Renderizar las tarjetas de artistas
+  // Render artist cards
   function render_artist_cards() {
     const artists_list = load_artists();
     const cards_container = document.querySelector('#musician-card .card') || document.createElement('article');
@@ -48,11 +48,11 @@ document.addEventListener('DOMContentLoaded', function() {
       artist_card.innerHTML = `
         <img src="${artist.image}" alt="${artist.name}">
         <h3>${artist.name}</h3>
-        <p>Género:</p>
+        <p>Genre:</p>
         ${artist.genres.map(genre => `<p>${genre}</p>`).join('')}
         <div class="crud-actions">
           <button class="edit-btn" data-index="${index}">Editar</button>
-          <button class="delete-btn" data-index="${index}">Eliminar</button>
+          <button class="delete-btn" data-index="${index}">Borrar</button>
         </div>
       `;
       cards_container.appendChild(artist_card);
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     musician_card_container.appendChild(cards_container);
 
-    // Eventos para editar y eliminar
+    // Events for edit and delete
     document.querySelectorAll('.edit-btn').forEach(button => {
       button.addEventListener('click', (e) => edit_artist(e.target.dataset.index));
     });
@@ -69,19 +69,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Abrir modal para agregar artista
+  // Open modal to add artist
   add_artist_button.addEventListener('click', () => {
     editing_artist_index = null;
-    modal_title.textContent = 'Agregar Artista';
+    modal_title.textContent = 'Add Artist';
     artist_form.reset();
     artist_modal.style.display = 'flex';
   });
 
-  // Cerrar modal
+  // Close modal
   close_modal_button.addEventListener('click', () => artist_modal.style.display = 'none');
   cancel_modal_button.addEventListener('click', () => artist_modal.style.display = 'none');
 
-  // Guardar artista
+  // Save artist
   artist_form.addEventListener('submit', (e) => {
     e.preventDefault();
     const artist_name = document.getElementById('artist-name').value;
@@ -100,21 +100,21 @@ document.addEventListener('DOMContentLoaded', function() {
     render_artist_cards();
   });
 
-  // Editar artista
+  // Edit artist
   function edit_artist(index) {
     const artists_list = load_artists();
     const artist_to_edit = artists_list[index];
     editing_artist_index = index;
-    modal_title.textContent = 'Editar Artista';
+    modal_title.textContent = 'Edit Artist';
     document.getElementById('artist-name').value = artist_to_edit.name;
     document.getElementById('artist-image').value = artist_to_edit.image;
     document.getElementById('artist-genres').value = artist_to_edit.genres.join(', ');
     artist_modal.style.display = 'flex';
   }
 
-  // Eliminar artista
+  // Delete artist
   function delete_artist(index) {
-    if (confirm('¿Estás seguro de que quieres eliminar este artista?')) {
+    if (confirm('Are you sure you want to delete this artist?')) {
       const artists_list = load_artists();
       artists_list.splice(index, 1);
       save_artists(artists_list);
