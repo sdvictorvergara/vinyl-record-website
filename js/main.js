@@ -1,17 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const musicianCard = document.getElementById('musician-card');
-  const addArtistBtn = document.getElementById('add-artist-btn');
-  const modal = document.getElementById('artist-modal');
-  const closeModal = document.querySelector('.close');
-  const artistForm = document.getElementById('artist-form');
-  const modalTitle = document.getElementById('modal-title');
-  const saveBtn = document.getElementById('save-artist-btn');
-  const cancelBtn = document.getElementById('cancel-btn');
+  const musician_card_container = document.getElementById('musician-card');
+  const add_artist_button = document.getElementById('add-artist-btn');
+  const artist_modal = document.getElementById('artist-modal');
+  const close_modal_button = document.querySelector('.close');
+  const artist_form = document.getElementById('artist-form');
+  const modal_title = document.getElementById('modal-title');
+  const save_artist_button = document.getElementById('save-artist-btn');
+  const cancel_modal_button = document.getElementById('cancel-btn');
 
-  let editingIndex = null;
+  let editing_artist_index = null;
 
-  // Datos predeterminados de artistas
-  const defaultArtists = [
+  // Datos de artistas predeterminados
+  const default_artists = [
     { name: 'Cacho Castaña', image: 'images/artists/cacho-castaña.jpeg', genres: ['Balada Romántica', 'Tango'] },
     { name: 'Carlos Gardel', image: 'images/artists/carlos-gardel.jpeg', genres: ['Música clásica', 'Tango'] },
     { name: 'Hugo del Carril', image: 'images/artists/hugo-carril.jpg', genres: ['Pop', 'Tango'] },
@@ -24,28 +24,28 @@ document.addEventListener('DOMContentLoaded', function() {
     { name: 'WOS', image: 'images/artists/wos.jpg', genres: ['Rock Alternativo', 'Hip hop'] }
   ];
 
-  // Cargar artistas desde localStorage o usar predeterminados
-  function loadArtists() {
-    const storedArtists = localStorage.getItem('artists');
-    return storedArtists ? JSON.parse(storedArtists) : defaultArtists;
+  // Cargar artistas desde localStorage
+  function load_artists() {
+    const stored_artists = localStorage.getItem('artists');
+    return stored_artists ? JSON.parse(stored_artists) : default_artists;
   }
 
   // Guardar artistas en localStorage
-  function saveArtists(artists) {
-    localStorage.setItem('artists', JSON.stringify(artists));
+  function save_artists(artists_list) {
+    localStorage.setItem('artists', JSON.stringify(artists_list));
   }
 
-  // Renderizar tarjetas de artistas
-  function renderArtists() {
-    const artists = loadArtists();
-    const cardsContainer = document.querySelector('#musician-card .card') || document.createElement('article');
-    cardsContainer.className = 'card';
-    cardsContainer.innerHTML = '';
+  // Renderizar las tarjetas de artistas
+  function render_artist_cards() {
+    const artists_list = load_artists();
+    const cards_container = document.querySelector('#musician-card .card') || document.createElement('article');
+    cards_container.className = 'card';
+    cards_container.innerHTML = '';
 
-    artists.forEach((artist, index) => {
-      const miniCard = document.createElement('div');
-      miniCard.className = 'mini-card';
-      miniCard.innerHTML = `
+    artists_list.forEach((artist, index) => {
+      const artist_card = document.createElement('div');
+      artist_card.className = 'mini-card';
+      artist_card.innerHTML = `
         <img src="${artist.image}" alt="${artist.name}">
         <h3>${artist.name}</h3>
         <p>Género:</p>
@@ -55,73 +55,72 @@ document.addEventListener('DOMContentLoaded', function() {
           <button class="delete-btn" data-index="${index}">Eliminar</button>
         </div>
       `;
-      cardsContainer.appendChild(miniCard);
+      cards_container.appendChild(artist_card);
     });
 
-    musicianCard.appendChild(cardsContainer);
+    musician_card_container.appendChild(cards_container);
 
-    // Agregar event listeners a botones de editar/eliminar
-    document.querySelectorAll('.edit-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => editArtist(e.target.dataset.index));
+    // Eventos para editar y eliminar
+    document.querySelectorAll('.edit-btn').forEach(button => {
+      button.addEventListener('click', (e) => edit_artist(e.target.dataset.index));
     });
-    document.querySelectorAll('.delete-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => deleteArtist(e.target.dataset.index));
+    document.querySelectorAll('.delete-btn').forEach(button => {
+      button.addEventListener('click', (e) => delete_artist(e.target.dataset.index));
     });
   }
 
-  // Mostrar modal para agregar
-  addArtistBtn.addEventListener('click', () => {
-    editingIndex = null;
-    modalTitle.textContent = 'Agregar Artista';
-    artistForm.reset();
-    modal.style.display = 'flex';
+  // Abrir modal para agregar artista
+  add_artist_button.addEventListener('click', () => {
+    editing_artist_index = null;
+    modal_title.textContent = 'Agregar Artista';
+    artist_form.reset();
+    artist_modal.style.display = 'flex';
   });
 
   // Cerrar modal
-  closeModal.addEventListener('click', () => modal.style.display = 'none');
-  cancelBtn.addEventListener('click', () => modal.style.display = 'none');
+  close_modal_button.addEventListener('click', () => artist_modal.style.display = 'none');
+  cancel_modal_button.addEventListener('click', () => artist_modal.style.display = 'none');
 
-  // Guardar artista (crear o actualizar)
-  artistForm.addEventListener('submit', (e) => {
+  // Guardar artista
+  artist_form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const name = document.getElementById('artist-name').value;
-    const image = document.getElementById('artist-image').value;
-    const genres = document.getElementById('artist-genres').value.split(',').map(g => g.trim());
+    const artist_name = document.getElementById('artist-name').value;
+    const artist_image = document.getElementById('artist-image').value;
+    const artist_genres = document.getElementById('artist-genres').value.split(',').map(g => g.trim());
 
-    const artists = loadArtists();
-    if (editingIndex !== null) {
-      artists[editingIndex] = { name, image, genres };
+    const artists_list = load_artists();
+    if (editing_artist_index !== null) {
+      artists_list[editing_artist_index] = { name: artist_name, image: artist_image, genres: artist_genres };
     } else {
-      artists.push({ name, image, genres });
+      artists_list.push({ name: artist_name, image: artist_image, genres: artist_genres });
     }
 
-    saveArtists(artists);
-    modal.style.display = 'none';
-    renderArtists();
+    save_artists(artists_list);
+    artist_modal.style.display = 'none';
+    render_artist_cards();
   });
 
   // Editar artista
-  function editArtist(index) {
-    const artists = loadArtists();
-    const artist = artists[index];
-    editingIndex = index;
-    modalTitle.textContent = 'Editar Artista';
-    document.getElementById('artist-name').value = artist.name;
-    document.getElementById('artist-image').value = artist.image;
-    document.getElementById('artist-genres').value = artist.genres.join(', ');
-    modal.style.display = 'flex';
+  function edit_artist(index) {
+    const artists_list = load_artists();
+    const artist_to_edit = artists_list[index];
+    editing_artist_index = index;
+    modal_title.textContent = 'Editar Artista';
+    document.getElementById('artist-name').value = artist_to_edit.name;
+    document.getElementById('artist-image').value = artist_to_edit.image;
+    document.getElementById('artist-genres').value = artist_to_edit.genres.join(', ');
+    artist_modal.style.display = 'flex';
   }
 
   // Eliminar artista
-  function deleteArtist(index) {
+  function delete_artist(index) {
     if (confirm('¿Estás seguro de que quieres eliminar este artista?')) {
-      const artists = loadArtists();
-      artists.splice(index, 1);
-      saveArtists(artists);
-      renderArtists();
+      const artists_list = load_artists();
+      artists_list.splice(index, 1);
+      save_artists(artists_list);
+      render_artist_cards();
     }
   }
 
-  // Inicializar
-  renderArtists();
+  render_artist_cards();
 });
