@@ -47,7 +47,9 @@ vinyl-record-history-website/
 │       └── wos.jpg
 │
 └── js/
+    ├── form.js
     └── main.js
+
 
 ````
 ## 🙌 Credits & References
