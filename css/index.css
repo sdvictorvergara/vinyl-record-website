@@ -1,27 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap');
-
-:root {
-  /* COLORS */
-  --bg: #1c1a31;
-  --section-color: #141223;
-
-  /* OTHER THINGS */
-  --buttom-border: 25px;
-}
+@import url(global.css);
 
 /* BASE STYLES AND DESKTOP */
 @media only screen and (min-width: 992px) {
-  * {
-    margin: 0;
-    padding: 0;
-  }
-
-  body {
-    background-color: var(--bg);
-    font-family: 'Holtwood One SC', serif;
-    color: white;
-  }
-
   iframe {
     width: 100%;
     height: 100%;

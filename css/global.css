@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap');
+
+:root {
+    /* COLORS */
+    --bg: #1c1a31;
+    --section-color: #141223;
+    --st-button: #51faaa;
+    --low-button: #51faab77;
+
+    /* OTHER THINGS */
+    --buttom-border: 25px;
+    --transition-time: 0.5s;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg);
+    font-family: 'Holtwood One SC', serif;
+    color: white;
+}
