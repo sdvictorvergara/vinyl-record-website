@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const contact_form = document.getElementById('contact-box');
+  const CONTACT_FORM = document.getElementById('contact-box');
 
   // Show notification modal_________________________________________________________________________
   function show_modal(message) {
-    const modal = document.createElement('div');
-    modal.className = 'modal';
-    modal.style.display = 'flex';
+    const MODAL = document.createElement('div');
+    MODAL.className = 'modal';
+    MODAL.style.display = 'flex';
 
-    modal.innerHTML = `
+    MODAL.innerHTML = `
       <div class="modal-content notification-modal">
         <span class="close-notification">&times;</span>
         <h2 class="notification-title">¡Éxito!</h2>
@@ -16,17 +16,17 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
     `;
 
-    document.body.appendChild(modal);
+    document.body.appendChild(MODAL);
 
     function close_modal() {
-      modal.style.display = 'none';
-      document.body.removeChild(modal);
+      MODAL.style.display = 'none';
+      document.body.removeChild(MODAL);
     }
 
-    modal.querySelector('.close-notification').addEventListener('click', close_modal);
-    modal.querySelector('#notification-ok').addEventListener('click', close_modal);
-    modal.addEventListener('click', function (e) {
-      if (e.target === modal) close_modal();
+    MODAL.querySelector('.close-notification').addEventListener('click', close_modal);
+    MODAL.querySelector('#notification-ok').addEventListener('click', close_modal);
+    MODAL.addEventListener('click', function (e) {
+      if (e.target === MODAL) close_modal();
     });
   }
 
@@ -36,60 +36,60 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Save contact message to localStorage_________________________________________________________________________
-  function save_contact_message(contact_data) {
+  function save_contact_message(CONTACT_DATA) {
 
-    const existing_messages = localStorage.getItem('contact_messages');
-    const messages = existing_messages ? JSON.parse(existing_messages) : [];
+    const EXISTING_MESSAGES = localStorage.getItem('contact_messages');
+    const MESSAGES = EXISTING_MESSAGES ? JSON.parse(EXISTING_MESSAGES) : [];
 
-    messages.push(contact_data);
+    MESSAGES.push(CONTACT_DATA);
 
-    localStorage.setItem('contact_messages', JSON.stringify(messages));
+    localStorage.setItem('contact_messages', JSON.stringify(MESSAGES));
   }
 
   // Submit form_________________________________________________________________________
-  contact_form.addEventListener('submit', function (e) {
+  CONTACT_FORM.addEventListener('submit', function (e) {
     e.preventDefault();
 
     let is_valid = true;
-    const name_value = document.getElementById('name').value.trim();
-    const email_value = document.getElementById('email').value.trim();
-    const subject_value = document.getElementById('subject').value.trim();
-    const message_value = document.getElementById('message').value.trim();
+    const NAME_VALUE = document.getElementById('name').value.trim();
+    const EMAIL_VALUE = document.getElementById('email').value.trim();
+    const SUBJECT_VALUE = document.getElementById('subject').value.trim();
+    const MESSAGE_VALUE = document.getElementById('message').value.trim();
 
-    if (!name_value) {
+    if (!NAME_VALUE) {
       document.getElementById('error-name').textContent = 'Por favor, ingresa tu nombre';
       is_valid = false;
     }
 
-    if (!email_value) {
+    if (!EMAIL_VALUE) {
       document.getElementById('error-email').textContent = 'Por favor, ingresa tu correo electrónico';
       is_valid = false;
-    } else if (!validate_email(email_value)) {
+    } else if (!validate_email(EMAIL_VALUE)) {
       document.getElementById('error-email').textContent = 'Por favor, ingresa un correo electrónico válido';
       is_valid = false;
     }
 
-    if (!subject_value) {
+    if (!SUBJECT_VALUE) {
       document.getElementById('error-subject').textContent = 'Por favor, ingresa un asunto';
       is_valid = false;
     }
 
-    if (!message_value) {
+    if (!MESSAGE_VALUE) {
       document.getElementById('error-message').textContent = 'Por favor, escribe un mensaje';
       is_valid = false;
     }
 
     if (is_valid) {
-      const contact_data = {
-        name: name_value,
-        email: email_value,
-        subject: subject_value,
-        message: message_value
+      const CONTACT_DATA = {
+        name: NAME_VALUE,
+        email: EMAIL_VALUE,
+        subject: SUBJECT_VALUE,
+        message: MESSAGE_VALUE
       };
 
-      save_contact_message(contact_data);
+      save_contact_message(CONTACT_DATA);
 
-      contact_form.reset();
+      CONTACT_FORM.reset();
       show_modal('¡Mensaje enviado correctamente!');
     }
   });

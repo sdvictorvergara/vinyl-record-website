@@ -1,16 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const musician_card_container = document.getElementById('musician-card');
-  const add_artist_button = document.getElementById('add-artist-btn');
-  const artist_modal = document.getElementById('artist-modal');
-  const close_modal_button = document.querySelector('.close');
-  const artist_form = document.getElementById('artist-form');
-  const modal_title = document.getElementById('modal-title');
-  const cancel_modal_button = document.getElementById('cancel-btn');
+  const MUSICIAN_CARD_CONTAINER = document.getElementById('musician-card');
+  const ADD_ARTIST_BUTTON = document.getElementById('add-artist-btn');
+  const ARTIST_MODAL = document.getElementById('artist-modal');
+  const CLOSE_MODAL_BUTTON = document.querySelector('.close');
+  const ARTIST_FORM = document.getElementById('artist-form');
+  const MODAL_TITLE = document.getElementById('modal-title');
+  const CANCEL_MODAL_BUTTON = document.getElementById('cancel-btn');
 
   let editing_index = null;
 
   // Default artists_________________________________________________________________________
-  const default_artists = [
+  const DEFAULT_ARTISTS = [
     { name: 'Cacho Castaña', image: 'images/artists/cacho-castaña.jpeg', genres: ['Balada Romántica', 'Tango'] },
     { name: 'Carlos Gardel', image: 'images/artists/carlos-gardel.jpeg', genres: ['Música clásica', 'Tango'] },
     { name: 'Hugo del Carril', image: 'images/artists/hugo-carril.jpg', genres: ['Pop', 'Tango'] },
@@ -25,11 +25,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Show notification modal_________________________________________________________________________
   function show_modal(message) {
-    const modal = document.createElement('div');
-    modal.className = 'modal';
-    modal.style.display = 'flex';
+    const MODAL = document.createElement('div');
+    MODAL.className = 'modal';
+    MODAL.style.display = 'flex';
 
-    modal.innerHTML = `
+    MODAL.innerHTML = `
       <div class="modal-content notification-modal">
         <span class="close-notification">&times;</span>
         <h2 class="notification-title">¡Éxito!</h2>
@@ -38,27 +38,27 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
     `;
 
-    document.body.appendChild(modal);
+    document.body.appendChild(MODAL);
 
     function close_notification_modal() {
-      modal.style.display = 'none';
-      document.body.removeChild(modal);
+      MODAL.style.display = 'none';
+      document.body.removeChild(MODAL);
     }
 
-    modal.querySelector('.close-notification').addEventListener('click', close_notification_modal);
-    modal.querySelector('#notification-ok').addEventListener('click', close_notification_modal);
-    modal.addEventListener('click', function (e) {
-      if (e.target === modal) close_notification_modal();
+    MODAL.querySelector('.close-notification').addEventListener('click', close_notification_modal);
+    MODAL.querySelector('#notification-ok').addEventListener('click', close_notification_modal);
+    MODAL.addEventListener('click', function (e) {
+      if (e.target === MODAL) close_notification_modal();
     });
   }
 
   // Show confirmation modal_________________________________________________________________________
   function show_confirm_modal(message, on_confirm) {
-    const modal = document.createElement('div');
-    modal.className = 'modal';
-    modal.style.display = 'flex';
+    const MODAL = document.createElement('div');
+    MODAL.className = 'modal';
+    MODAL.style.display = 'flex';
 
-    modal.innerHTML = `
+    MODAL.innerHTML = `
       <div class="modal-content notification-modal">
         <span class="close-notification">&times;</span>
         <h2 class="notification-title">Confirmación</h2>
@@ -70,21 +70,21 @@ document.addEventListener('DOMContentLoaded', function () {
       </div>
     `;
 
-    document.body.appendChild(modal);
+    document.body.appendChild(MODAL);
 
     function close_confirm_modal() {
-      modal.style.display = 'none';
-      document.body.removeChild(modal);
+      MODAL.style.display = 'none';
+      document.body.removeChild(MODAL);
     }
 
-    modal.querySelector('.close-notification').addEventListener('click', close_confirm_modal);
-    modal.querySelector('#confirm-cancel').addEventListener('click', close_confirm_modal);
-    modal.querySelector('#confirm-ok').addEventListener('click', function () {
+    MODAL.querySelector('.close-notification').addEventListener('click', close_confirm_modal);
+    MODAL.querySelector('#confirm-cancel').addEventListener('click', close_confirm_modal);
+    MODAL.querySelector('#confirm-ok').addEventListener('click', function () {
       on_confirm();
       close_confirm_modal();
     });
-    modal.addEventListener('click', function (e) {
-      if (e.target === modal) close_confirm_modal();
+    MODAL.addEventListener('click', function (e) {
+      if (e.target === MODAL) close_confirm_modal();
     });
   }
 
@@ -100,8 +100,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Load artists_________________________________________________________________________
   function load_artists() {
-    const stored = localStorage.getItem('artists');
-    return stored ? JSON.parse(stored) : default_artists;
+    const STORED = localStorage.getItem('artists');
+    return STORED ? JSON.parse(STORED) : DEFAULT_ARTISTS;
   }
 
   function save_artists(artists) {
@@ -110,21 +110,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Render artist cards_________________________________________________________________________
   function render_artists() {
-    const artists = load_artists();
+    const ARTISTS = load_artists();
     let container = document.querySelector('#musician-card .card');
 
     if (!container) {
       container = document.createElement('article');
       container.className = 'card';
-      musician_card_container.appendChild(container);
+      MUSICIAN_CARD_CONTAINER.appendChild(container);
     }
 
     container.innerHTML = '';
 
-    artists.forEach((artist, index) => {
-      const card = document.createElement('div');
-      card.className = 'mini-card';
-      card.innerHTML = `
+    ARTISTS.forEach((artist, index) => {
+      const CARD = document.createElement('div');
+      CARD.className = 'mini-card';
+      CARD.innerHTML = `
         <img src="${artist.image}" alt="${artist.name}">
         <h3>${artist.name}</h3>
         <p>Genre:</p>
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
           <button class="delete-btn" data-index="${index}">Borrar</button>
         </div>
       `;
-      container.appendChild(card);
+      container.appendChild(CARD);
     });
 
     document.querySelectorAll('.edit-btn').forEach(btn => {
@@ -145,95 +145,95 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  add_artist_button.addEventListener('click', () => {
+  ADD_ARTIST_BUTTON.addEventListener('click', () => {
     editing_index = null;
-    modal_title.textContent = 'Agregar Artista';
-    artist_form.reset();
-    artist_modal.style.display = 'flex';
+    MODAL_TITLE.textContent = 'Agregar Artista';
+    ARTIST_FORM.reset();
+    ARTIST_MODAL.style.display = 'flex';
   });
 
   // Close modal_________________________________________________________________________
-  close_modal_button.addEventListener('click', () => {
-    artist_modal.style.display = 'none';
+  CLOSE_MODAL_BUTTON.addEventListener('click', () => {
+    ARTIST_MODAL.style.display = 'none';
   });
 
-  cancel_modal_button.addEventListener('click', () => {
-    artist_modal.style.display = 'none';
+  CANCEL_MODAL_BUTTON.addEventListener('click', () => {
+    ARTIST_MODAL.style.display = 'none';
   });
 
   // Save artist_________________________________________________________________________
-  artist_form.addEventListener('submit', (e) => {
+  ARTIST_FORM.addEventListener('submit', (e) => {
     e.preventDefault();
 
     let is_valid = true;
-    const name = document.getElementById('artist-name').value.trim();
-    const image = document.getElementById('artist-image').value.trim();
-    const genres_input = document.getElementById('artist-genres').value.trim();
+    const NAME = document.getElementById('artist-name').value.trim();
+    const IMAGE = document.getElementById('artist-image').value.trim();
+    const GENRES_INPUT = document.getElementById('artist-genres').value.trim();
 
-    if (!name) {
+    if (!NAME) {
       document.getElementById('error-artist-name').textContent = 'Por favor, ingresa el nombre del artista';
       is_valid = false;
     }
 
-    if (!image) {
+    if (!IMAGE) {
       document.getElementById('error-artist-image').textContent = 'Por favor, ingresa la URL de la imagen';
       is_valid = false;
-    } else if (!is_valid_url(image)) {
+    } else if (!is_valid_url(IMAGE)) {
       document.getElementById('error-artist-image').textContent = 'Por favor, ingresa una URL válida';
       is_valid = false;
     }
 
-    if (!genres_input) {
+    if (!GENRES_INPUT) {
       document.getElementById('error-artist-genres').textContent = 'Por favor, ingresa al menos un género';
       is_valid = false;
     }
 
     if (is_valid) {
-      const genres = genres_input.split(',').map(g => g.trim()).filter(g => g);
+      const GENRES = GENRES_INPUT.split(',').map(g => g.trim()).filter(g => g);
 
-      if (genres.length === 0) {
+      if (GENRES.length === 0) {
         document.getElementById('error-artist-genres').textContent = 'Por favor, ingresa al menos un género válido';
         return;
       }
 
-      const artists = load_artists();
+      const ARTISTS = load_artists();
 
       if (editing_index !== null) {
-        artists[editing_index] = { name, image, genres };
+        ARTISTS[editing_index] = { name: NAME, image: IMAGE, genres: GENRES };
         show_modal('¡Artista actualizado correctamente!');
       } else {
-        artists.push({ name, image, genres });
+        ARTISTS.push({ name: NAME, image: IMAGE, genres: GENRES });
         show_modal('¡Artista agregado correctamente!');
       }
 
-      save_artists(artists);
-      artist_modal.style.display = 'none';
+      save_artists(ARTISTS);
+      ARTIST_MODAL.style.display = 'none';
       render_artists();
     }
   });
 
   // Edit artist_________________________________________________________________________
   function edit_artist(index) {
-    const artists = load_artists();
-    const artist = artists[index];
+    const ARTISTS = load_artists();
+    const ARTIST = ARTISTS[index];
     editing_index = index;
-    modal_title.textContent = 'Editar Artista';
-    document.getElementById('artist-name').value = artist.name;
-    document.getElementById('artist-image').value = artist.image;
-    document.getElementById('artist-genres').value = artist.genres.join(', ');
-    artist_modal.style.display = 'flex';
+    MODAL_TITLE.textContent = 'Editar Artista';
+    document.getElementById('artist-name').value = ARTIST.name;
+    document.getElementById('artist-image').value = ARTIST.image;
+    document.getElementById('artist-genres').value = ARTIST.genres.join(', ');
+    ARTIST_MODAL.style.display = 'flex';
   }
 
   // Delete artist_________________________________________________________________________
   function delete_artist(index) {
-    const artists = load_artists();
-    const artist_name = artists[index].name;
+    const ARTISTS = load_artists();
+    const ARTIST_NAME = ARTISTS[index].name;
 
     show_confirm_modal(
-      `¿Estás seguro de que quieres eliminar a ${artist_name}?`,
+      `¿Estás seguro de que quieres eliminar a ${ARTIST_NAME}?`,
       function () {
-        artists.splice(index, 1);
-        save_artists(artists);
+        ARTISTS.splice(index, 1);
+        save_artists(ARTISTS);
         render_artists();
         show_modal('Artista eliminado correctamente');
       }
