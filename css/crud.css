@@ -273,3 +273,68 @@
     font-size: 0.7rem;
   }
 }
+
+/* SCROLL ANIMATION FOR CARDS_________________________________________________________________________ */
+
+/* Estado inicial - cards ocultas */
+.mini-card.card-hidden {
+  opacity: 0;
+  transform: translateY(50px) scale(0.9);
+  transition: opacity 0.6s ease-out, 
+              transform 0.6s ease-out;
+}
+
+/* Estado visible - cards aparecen */
+.mini-card.card-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Variante alternativa con efecto fade + slide desde abajo */
+/* Si prefieres un efecto más dramático, descomenta esto: */
+/*
+.mini-card.card-hidden {
+  opacity: 0;
+  transform: translateY(80px) scale(0.8) rotateX(20deg);
+  transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.mini-card.card-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1) rotateX(0);
+}
+*/
+
+/* Efecto adicional para el hover (ya existente pero mejorado) */
+.mini-card.card-visible:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 0 25px #51faaa;
+}
+
+/* Responsive: reducir movimiento en móviles para mejor performance */
+@media only screen and (max-width: 600px) {
+  .mini-card.card-hidden {
+    transform: translateY(30px) scale(0.95);
+    transition: opacity 0.4s ease-out, 
+                transform 0.4s ease-out;
+  }
+  
+  .mini-card.card-visible:hover {
+    transform: translateY(-3px) scale(1.02);
+  }
+}
+
+/* Preferencia de movimiento reducido para accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .mini-card.card-hidden {
+    opacity: 0;
+    transform: none;
+    transition: opacity 0.3s ease-out;
+  }
+  
+  .mini-card.card-visible {
+    opacity: 1;
+    transform: none;
+  }
+}

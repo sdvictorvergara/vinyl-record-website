@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     ARTISTS.forEach((artist, index) => {
       const CARD = document.createElement('div');
-      CARD.className = 'mini-card';
+      CARD.className = 'mini-card card-hidden';  // ⬅️ CAMBIO AQUÍ: añadido 'card-hidden'
       CARD.innerHTML = `
         <img src="${artist.image}" alt="${artist.name}">
         <h3>${artist.name}</h3>
