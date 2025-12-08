@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const CONTACT_FORM = document.getElementById('contact-box');
 
   // Show notification modal_________________________________________________________________________
-  function show_modal(message) {
+  function showModal(message) {
     const MODAL = document.createElement('div');
     MODAL.className = 'modal';
     MODAL.style.display = 'flex';
@@ -18,30 +18,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.body.appendChild(MODAL);
 
-    function close_modal() {
+    function closeModal() {
       MODAL.style.display = 'none';
       document.body.removeChild(MODAL);
     }
 
-    MODAL.querySelector('.close-notification').addEventListener('click', close_modal);
-    MODAL.querySelector('#notification-ok').addEventListener('click', close_modal);
+    MODAL.querySelector('.close-notification').addEventListener('click', closeModal);
+    MODAL.querySelector('#notification-ok').addEventListener('click', closeModal);
     MODAL.addEventListener('click', function (e) {
-      if (e.target === MODAL) close_modal();
+      if (e.target === MODAL) closeModal();
     });
   }
 
   // Validate email format_________________________________________________________________________
-  function validate_email(email) {
+  function validateEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   }
 
   // Save contact message to localStorage_________________________________________________________________________
-  function save_contact_message(CONTACT_DATA) {
+  function saveContactMessage(contactData) {
 
     const EXISTING_MESSAGES = localStorage.getItem('contact_messages');
     const MESSAGES = EXISTING_MESSAGES ? JSON.parse(EXISTING_MESSAGES) : [];
 
-    MESSAGES.push(CONTACT_DATA);
+    MESSAGES.push(contactData);
 
     localStorage.setItem('contact_messages', JSON.stringify(MESSAGES));
   }
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
   CONTACT_FORM.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    let is_valid = true;
+    let isValid = true;
     const NAME_VALUE = document.getElementById('name').value.trim();
     const EMAIL_VALUE = document.getElementById('email').value.trim();
     const SUBJECT_VALUE = document.getElementById('subject').value.trim();
@@ -58,28 +58,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!NAME_VALUE) {
       document.getElementById('error-name').textContent = 'Por favor, ingresa tu nombre';
-      is_valid = false;
+      isValid = false;
     }
 
     if (!EMAIL_VALUE) {
       document.getElementById('error-email').textContent = 'Por favor, ingresa tu correo electrónico';
-      is_valid = false;
-    } else if (!validate_email(EMAIL_VALUE)) {
+      isValid = false;
+    } else if (!validateEmail(EMAIL_VALUE)) {
       document.getElementById('error-email').textContent = 'Por favor, ingresa un correo electrónico válido';
-      is_valid = false;
+      isValid = false;
     }
 
     if (!SUBJECT_VALUE) {
       document.getElementById('error-subject').textContent = 'Por favor, ingresa un asunto';
-      is_valid = false;
+      isValid = false;
     }
 
     if (!MESSAGE_VALUE) {
       document.getElementById('error-message').textContent = 'Por favor, escribe un mensaje';
-      is_valid = false;
+      isValid = false;
     }
 
-    if (is_valid) {
+    if (isValid) {
       const CONTACT_DATA = {
         name: NAME_VALUE,
         email: EMAIL_VALUE,
@@ -87,10 +87,10 @@ document.addEventListener('DOMContentLoaded', function () {
         message: MESSAGE_VALUE
       };
 
-      save_contact_message(CONTACT_DATA);
+      saveContactMessage(CONTACT_DATA);
 
       CONTACT_FORM.reset();
-      show_modal('¡Mensaje enviado correctamente!');
+      showModal('¡Mensaje enviado correctamente!');
     }
   });
 });

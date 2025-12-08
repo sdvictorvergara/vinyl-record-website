@@ -18,7 +18,7 @@
   background-color: white;
 }
 
-/* Corrección para mini-card - Aumentar altura_________________________________________________________________________ */
+/* Increase height_________________________________________________________________________ */
 .mini-card {
   box-sizing: border-box;
   overflow: hidden;
@@ -130,7 +130,7 @@
   outline: 2px solid #51faaa;
 }
 
-/* Estilos para mensajes de error_________________________________________________________________________ */
+/* Styles for error messages_________________________________________________________________________ */
 .error-message {
   display: block;
   color: #ff4d4d;
@@ -160,7 +160,7 @@
   background-color: white;
 }
 
-/* Estilos para modales de notificación_________________________________________________________________________ */
+/* Styles for notification modals_________________________________________________________________________ */
 .notification-modal {
   max-width: 400px;
   text-align: center;

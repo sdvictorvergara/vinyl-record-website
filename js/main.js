@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const MODAL_TITLE = document.getElementById('modal-title');
   const CANCEL_MODAL_BUTTON = document.getElementById('cancel-btn');
 
-  let editing_index = null;
+  let editingIndex = null;
 
   // Default artists_________________________________________________________________________
   const DEFAULT_ARTISTS = [
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
   ];
 
   // Show notification modal_________________________________________________________________________
-  function show_modal(message) {
+  function showModal(message) {
     const MODAL = document.createElement('div');
     MODAL.className = 'modal';
     MODAL.style.display = 'flex';
@@ -40,20 +40,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.body.appendChild(MODAL);
 
-    function close_notification_modal() {
+    function closeNotificationModal() {
       MODAL.style.display = 'none';
       document.body.removeChild(MODAL);
     }
 
-    MODAL.querySelector('.close-notification').addEventListener('click', close_notification_modal);
-    MODAL.querySelector('#notification-ok').addEventListener('click', close_notification_modal);
+    MODAL.querySelector('.close-notification').addEventListener('click', closeNotificationModal);
+    MODAL.querySelector('#notification-ok').addEventListener('click', closeNotificationModal);
     MODAL.addEventListener('click', function (e) {
-      if (e.target === MODAL) close_notification_modal();
+      if (e.target === MODAL) closeNotificationModal();
     });
   }
 
   // Show confirmation modal_________________________________________________________________________
-  function show_confirm_modal(message, on_confirm) {
+  function showConfirmModal(message, onConfirm) {
     const MODAL = document.createElement('div');
     MODAL.className = 'modal';
     MODAL.style.display = 'flex';
@@ -72,24 +72,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.body.appendChild(MODAL);
 
-    function close_confirm_modal() {
+    function closeConfirmModal() {
       MODAL.style.display = 'none';
       document.body.removeChild(MODAL);
     }
 
-    MODAL.querySelector('.close-notification').addEventListener('click', close_confirm_modal);
-    MODAL.querySelector('#confirm-cancel').addEventListener('click', close_confirm_modal);
+    MODAL.querySelector('.close-notification').addEventListener('click', closeConfirmModal);
+    MODAL.querySelector('#confirm-cancel').addEventListener('click', closeConfirmModal);
     MODAL.querySelector('#confirm-ok').addEventListener('click', function () {
-      on_confirm();
-      close_confirm_modal();
+      onConfirm();
+      closeConfirmModal();
     });
     MODAL.addEventListener('click', function (e) {
-      if (e.target === MODAL) close_confirm_modal();
+      if (e.target === MODAL) closeConfirmModal();
     });
   }
 
   // Validate URL_________________________________________________________________________
-  function is_valid_url(url) {
+  function isValidUrl(url) {
     try {
       new URL(url);
       return true;
@@ -99,18 +99,18 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Load artists_________________________________________________________________________
-  function load_artists() {
+  function loadArtists() {
     const STORED = localStorage.getItem('artists');
     return STORED ? JSON.parse(STORED) : DEFAULT_ARTISTS;
   }
 
-  function save_artists(artists) {
+  function saveArtists(artists) {
     localStorage.setItem('artists', JSON.stringify(artists));
   }
 
   // Render artist cards_________________________________________________________________________
-  function render_artists() {
-    const ARTISTS = load_artists();
+  function renderArtists() {
+    const ARTISTS = loadArtists();
     let container = document.querySelector('#musician-card .card');
 
     if (!container) {
@@ -138,15 +138,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     document.querySelectorAll('.edit-btn').forEach(btn => {
-      btn.addEventListener('click', () => edit_artist(btn.dataset.index));
+      btn.addEventListener('click', () => editArtist(btn.dataset.index));
     });
     document.querySelectorAll('.delete-btn').forEach(btn => {
-      btn.addEventListener('click', () => delete_artist(btn.dataset.index));
+      btn.addEventListener('click', () => deleteArtist(btn.dataset.index));
     });
   }
 
   ADD_ARTIST_BUTTON.addEventListener('click', () => {
-    editing_index = null;
+    editingIndex = null;
     MODAL_TITLE.textContent = 'Agregar Artista';
     ARTIST_FORM.reset();
     ARTIST_MODAL.style.display = 'flex';
@@ -165,30 +165,30 @@ document.addEventListener('DOMContentLoaded', function () {
   ARTIST_FORM.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    let is_valid = true;
+    let isValid = true;
     const NAME = document.getElementById('artist-name').value.trim();
     const IMAGE = document.getElementById('artist-image').value.trim();
     const GENRES_INPUT = document.getElementById('artist-genres').value.trim();
 
     if (!NAME) {
       document.getElementById('error-artist-name').textContent = 'Por favor, ingresa el nombre del artista';
-      is_valid = false;
+      isValid = false;
     }
 
     if (!IMAGE) {
       document.getElementById('error-artist-image').textContent = 'Por favor, ingresa la URL de la imagen';
-      is_valid = false;
-    } else if (!is_valid_url(IMAGE)) {
+      isValid = false;
+    } else if (!isValidUrl(IMAGE)) {
       document.getElementById('error-artist-image').textContent = 'Por favor, ingresa una URL válida';
-      is_valid = false;
+      isValid = false;
     }
 
     if (!GENRES_INPUT) {
       document.getElementById('error-artist-genres').textContent = 'Por favor, ingresa al menos un género';
-      is_valid = false;
+      isValid = false;
     }
 
-    if (is_valid) {
+    if (isValid) {
       const GENRES = GENRES_INPUT.split(',').map(g => g.trim()).filter(g => g);
 
       if (GENRES.length === 0) {
@@ -196,27 +196,27 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      const ARTISTS = load_artists();
+      const ARTISTS = loadArtists();
 
-      if (editing_index !== null) {
-        ARTISTS[editing_index] = { name: NAME, image: IMAGE, genres: GENRES };
-        show_modal('¡Artista actualizado correctamente!');
+      if (editingIndex !== null) {
+        ARTISTS[editingIndex] = { name: NAME, image: IMAGE, genres: GENRES };
+        showModal('¡Artista actualizado correctamente!');
       } else {
         ARTISTS.push({ name: NAME, image: IMAGE, genres: GENRES });
-        show_modal('¡Artista agregado correctamente!');
+        showModal('¡Artista agregado correctamente!');
       }
 
-      save_artists(ARTISTS);
+      saveArtists(ARTISTS);
       ARTIST_MODAL.style.display = 'none';
-      render_artists();
+      renderArtists();
     }
   });
 
   // Edit artist_________________________________________________________________________
-  function edit_artist(index) {
-    const ARTISTS = load_artists();
+  function editArtist(index) {
+    const ARTISTS = loadArtists();
     const ARTIST = ARTISTS[index];
-    editing_index = index;
+    editingIndex = index;
     MODAL_TITLE.textContent = 'Editar Artista';
     document.getElementById('artist-name').value = ARTIST.name;
     document.getElementById('artist-image').value = ARTIST.image;
@@ -225,20 +225,20 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Delete artist_________________________________________________________________________
-  function delete_artist(index) {
-    const ARTISTS = load_artists();
+  function deleteArtist(index) {
+    const ARTISTS = loadArtists();
     const ARTIST_NAME = ARTISTS[index].name;
 
-    show_confirm_modal(
+    showConfirmModal(
       `¿Estás seguro de que quieres eliminar a ${ARTIST_NAME}?`,
       function () {
         ARTISTS.splice(index, 1);
-        save_artists(ARTISTS);
-        render_artists();
-        show_modal('Artista eliminado correctamente');
+        saveArtists(ARTISTS);
+        renderArtists();
+        showModal('Artista eliminado correctamente');
       }
     );
   }
 
-  render_artists();
+  renderArtists();
 });
