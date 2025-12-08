@@ -48,6 +48,7 @@ vinyl-record-history-website/
 │
 └── js/
     ├── form.js
+    ├── scroll-animation.js
     └── main.js
 
 
