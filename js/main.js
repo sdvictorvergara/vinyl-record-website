@@ -88,10 +88,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Validate URL_________________________________________________________________________
-  function isValidUrl(url) {
+  // Validate URL or local path_________________________________________________________________________
+  function isValidUrlOrPath(input) {
+    if (input.startsWith('images/')) {
+      return true;
+    }
+    
     try {
-      new URL(url);
+      new URL(input);
       return true;
     } catch {
       return false;
@@ -123,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     ARTISTS.forEach((artist, index) => {
       const CARD = document.createElement('div');
-      CARD.className = 'mini-card card-hidden';  // ⬅️ CAMBIO AQUÍ: añadido 'card-hidden'
+      CARD.className = 'mini-card card-hidden';
       CARD.innerHTML = `
         <img src="${artist.image}" alt="${artist.name}">
         <h3>${artist.name}</h3>
@@ -149,6 +153,9 @@ document.addEventListener('DOMContentLoaded', function () {
     editingIndex = null;
     MODAL_TITLE.textContent = 'Agregar Artista';
     ARTIST_FORM.reset();
+    document.getElementById('error-artist-name').textContent = '';
+    document.getElementById('error-artist-image').textContent = '';
+    document.getElementById('error-artist-genres').textContent = '';
     ARTIST_MODAL.style.display = 'flex';
   });
 
@@ -165,6 +172,11 @@ document.addEventListener('DOMContentLoaded', function () {
   ARTIST_FORM.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    // Limpiar mensajes de error previos
+    document.getElementById('error-artist-name').textContent = '';
+    document.getElementById('error-artist-image').textContent = '';
+    document.getElementById('error-artist-genres').textContent = '';
+
     let isValid = true;
     const NAME = document.getElementById('artist-name').value.trim();
     const IMAGE = document.getElementById('artist-image').value.trim();
@@ -178,8 +190,8 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!IMAGE) {
       document.getElementById('error-artist-image').textContent = 'Por favor, ingresa la URL de la imagen';
       isValid = false;
-    } else if (!isValidUrl(IMAGE)) {
-      document.getElementById('error-artist-image').textContent = 'Por favor, ingresa una URL válida';
+    } else if (!isValidUrlOrPath(IMAGE)) {
+      document.getElementById('error-artist-image').textContent = 'Por favor, ingresa una URL válida o ruta local (ej: images/...)';
       isValid = false;
     }
 
@@ -221,6 +233,9 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('artist-name').value = ARTIST.name;
     document.getElementById('artist-image').value = ARTIST.image;
     document.getElementById('artist-genres').value = ARTIST.genres.join(', ');
+    document.getElementById('error-artist-name').textContent = '';
+    document.getElementById('error-artist-image').textContent = '';
+    document.getElementById('error-artist-genres').textContent = '';
     ARTIST_MODAL.style.display = 'flex';
   }
 
